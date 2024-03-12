@@ -10,7 +10,7 @@ public class Welcome {
 		System.out.println("당신의 이름을 입력하세요 : ");
 		String name = input.nextLine();
 
-		System.out.println("연락처를 입략하세요 : ");
+		System.out.println("연락처를 입력하세요 : ");
 		int phone = input.nextInt();
 		
 
