@@ -2,6 +2,8 @@ import java.util.Scanner;
 
 public class Welcome {
 	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+
 		String greeting = "Welcome to Shopping Mall";
 		String tagline = "Welcome to Book Market!";
 		
