@@ -6,6 +6,12 @@ public class Welcome {
 
 		String greeting = "Welcome to Shopping Mall";
 		String tagline = "Welcome to Book Market!";
+
+		System.out.println("당신의 이름을 입력하세요 : ");
+		String name = input.nextLine();
+
+		System.out.println("연락처를 입략하세요 : ");
+		int phone = input.nextInt();
 		
 
 		System.out.println("************************");
@@ -18,5 +24,9 @@ public class Welcome {
 		System.out.println("3. 장바구니 비우기\t7. 장바구니의 항목 삭제하기");
 		System.out.println("4. 영수증 표시하기\t8. 종료");
 		System.out.println("************************");
+
+		System.out.println("메뉴 번호를 선택하세요 : ");
+		int choice = input.nextInt();
+		System.out.println(choice + "번을 선택했습니다.");
 	}
 }
