@@ -40,22 +40,22 @@ public class Welcome {
 						System.out.println("이름 : " + name + "연락처 : " + phone);
 						break;
 					case 2:
-						System.out.println("2. 장바구니 상품 목록 보기");
+						System.out.println("2. 장바구니 상품 목록 보기 :");
 						break;
 					case 3:
-						System.out.println("3. 장바구니 비우기");
+						System.out.println("3. 장바구니 비우기 :");
 						break;
 					case 4:
-						System.out.println("4. 영수증 표시하기:");
+						System.out.println("4. 영수증 표시하기 :");
 						break;
 					case 5:
-						System.out.println("5. 장바구니의 항목 추가하기");
+						System.out.println("5. 장바구니의 항목 추가하기 :");
 						break;
 					case 6:
-						System.out.println("6. 장바구니의 항목 수량 줄기기");
+						System.out.println("6. 장바구니의 항목 수량 줄기기 :");
 						break;
 					case 7:
-						System.out.println("7. 장바구니의 항목 삭제하기");
+						System.out.println("7. 장바구니의 항목 삭제하기 :");
 						break;
 					case 8:
 						System.out.println("8. 종료");
