@@ -113,9 +113,9 @@ public class Welcome {
 			System.out.println("------------------------------");
 			System.out.println("    도서ID \t|    수량 \t|    합계");
 			for (int i = 0; i < mCartCount; i++) {
-				System.out.println("    " + mCartItem[i].getBookID() + " \t| ");
-				System.out.println("    " + mCartItem[i].getQuantity() + " \t| ");
-				System.out.println("    " + mCartItem[i].getTotalPrice());
+				System.out.print("    " + mCartItem[i].getBookID() + " \t| ");
+				System.out.print("    " + mCartItem[i].getQuantity() + " \t| ");
+				System.out.print("    " + mCartItem[i].getTotalPrice());
 				System.out.println("    ");
 			}
 			System.out.println("------------------------------");
