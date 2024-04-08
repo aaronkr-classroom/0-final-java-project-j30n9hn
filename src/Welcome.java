@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import ./CartItem.java;
 
 public class Welcome {
 	static final int NUM_BOOK = 3;
