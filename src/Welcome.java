@@ -160,7 +160,7 @@ public class Welcome {
 						System.out.println(book[numId][0] + " 도서가 장바구니에 추가되었습니다.");
 						//장바구니에 넣기
 						if(!isCartInBook(book[numId][0])) {
-							mCartItem[mCartCount++] = new CartItem(book[numID]);
+							mCartItem[mCartCount++] = new CartItem(book[numId]);
 						}
 					}
 					quit = true;
