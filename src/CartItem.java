@@ -1,4 +1,4 @@
-public calss CartItem {
+public class CartItem {
 	private String[] itemBook = new String[7];
 	private String bookID;
 	private int quantity;
