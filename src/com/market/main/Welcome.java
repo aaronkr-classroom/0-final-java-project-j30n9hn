@@ -245,7 +245,7 @@ public class Welcome {
 
 	public static void menuCartBill() throws CartException {
 			//System.out.println("4. 영수증 표시하기 :");
-			if (mCart.mCartCount == 0) throw new CartException("장바구니에 항목이 없음")
+			if (mCart.mCartCount == 0) throw new CartException("장바구니에 항목이 없음");
 			else {
 				System.out.println("배송받을 분은 고객 정보와 같습니까? Y | N");
 				Scanner input = new Scanner(System.in);
