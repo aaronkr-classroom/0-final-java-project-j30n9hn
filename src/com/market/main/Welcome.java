@@ -164,7 +164,7 @@ public class Welcome {
 				}
 			}
 	}
-	public static void menuCartAddItem(String book) {
+	public static void menuCartAddItem(Book[] booklist) {
 			//System.out.println("5. 장바구니의 항목 추가하기 :");
 
 			BookList(booklist);
