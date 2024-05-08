@@ -37,7 +37,7 @@ public class Cart implements CartInterface {
 		for (int i = 0; i < mCartCount; i++) {
 			System.out.print("    " + mCartItem[i].getBookID() + "\t|");
 			System.out.print("    " + mCartItem[i].getQuantity() + "\t|");
-			System.out.prinn("    " + mCartItem[i].getTotalPrice());
+			System.out.print("    " + mCartItem[i].getTotalPrice());
 			System.out.println("    ");
 		}
 		System.out.println("-------------------");
@@ -59,8 +59,8 @@ public class Cart implements CartInterface {
 		int num = 0;
 
 		for (int i = 0; i < mCartCount; i++) {
-			if (numID != i) {
-				CartItem[num++] = mCartItem[i];
+			if (numId != i) {
+				cartItem[num++] = mCartItem[i];
 			}
 		}
 

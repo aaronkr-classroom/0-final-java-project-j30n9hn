@@ -22,7 +22,7 @@ public class Book extends Item {
 	public String getName() { return name; }
 	public void setName(String name) { this.name = name; }
 	public int getUnitPrice() { return unitPrice; }
-	public void setUnitPrice(int unitPrice) { this.unitPrice unitPrice; }
+	public void setUnitPrice(int unitPrice) { this.unitPrice = unitPrice; }
 	public String getAuthor() { return author; }
 	public void setAuthor(String author) { this.author = author; }
 	public String getDescription() { return description; }
