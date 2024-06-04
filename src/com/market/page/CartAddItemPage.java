@@ -6,6 +6,10 @@ import com.market.bookitem.BookInIt;
 import com.market.cart.Cart;
 import java.awt.*;
 import java.util.ArrayList;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class CartAddItemPage extends JPanel {
 
@@ -69,20 +73,56 @@ public class CartAddItemPage extends JPanel {
 		JButton addButton = new JButton();
 		addButton.add(buttonLabel);
 		buttonPanel.add(addButton);
+		bookTable.addMouseListener(new MouseListener() {
+
+			public void mouseClicked(MouseEvent e) {
+				int row = bookTable.getSelectedRow();
+				int col = bookTable.getSelectedColumn();
+				mSelectRow = row;
+				Object value = bookTable.getValueAt(row, 0);
+				String str = value + ".jpg";
+
+				imageBook = new ImageIcon("./images/" + str);
+				imageBook.setImage(imageBook.getImage().getScaledInstance(250, 300, Image.SCALE_DEFAULT));
+				JLabel label = new JLabel(imageBook);
+				imagePanel.removeAll();
+				imagePanel.add(label);
+				imagePanel.revalidate();
+				imagePanel.repaint();
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+			}
+		});
+		addButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ArrayList<Book> booklist = BookInIt.getmBookList();
+				int select = JOptionPane.showConfirmDialog(addButton, "장바구니에 추가하겠습니까?");
+				if (select == 0) {
+					int numId = mSelectRow;
+					if (!isCartInBook(booklist.get(numId).getBookId())) {
+						mCart.insertBook(booklist.get(numId));
+					}
+					JOptionPane.showMessageDialog(addButton, "추가했습니다");
+				}
+			}
+		});
+	}
+	public boolean isCartInBook(String bookId) {
+		return mCart.isCartInBook(bookId);
 	}
 
-	public static void main(String[] args) {
-		Cart mCart = new Cart();
-		JFrame frame = new JFrame();
-		frame.setBounds(0, 0, 1000, 750);
-		frame.setLayout(null);
-
-		JPanel mPagePanel = new JPanel();
-		mPagePanel.setBounds(0, 150, 1000, 750);
-		frame.add(mPagePanel);
-
-		BookInIt.init();
-		mPagePanel.add("장바구니에 항목 추가하기", new CartAddItemPage(mPagePanel, mCart));
-		frame.setVisible(true);
-	}
 }

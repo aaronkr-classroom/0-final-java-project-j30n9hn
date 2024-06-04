@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.awt.event.ActionEvent;
+import java.io.FileWriter;
 
 public class AdminPage extends JPanel {
 
@@ -102,25 +104,57 @@ public class AdminPage extends JPanel {
 		JButton okButton = new JButton();
 		okButton.add(okLabel);
 		buttonPanel.add(okButton);
+		okButton.addActionListener(new AbstractAction() {
+			public void actionPerformed(ActionEvent e) {
+				String[] writeBook = new String[7];
+				writeBook[0] = idTextField.getText();
+				writeBook[1] = nameTextField.getText();
+				writeBook[2] = priceTextField.getText();
+				writeBook[3] = authorTextField.getText();
+				writeBook[4] = descTextField.getText();
+				writeBook[5] = categoryTextField.getText();
+				writeBook[6] = dateTextField.getText();
+				try {
+					FileWriter fw = new FileWriter("book.txt", true);
+					for (int i = 0; i < 7; i++) {
+						fw.write(writeBook[i] + "\n");
+					}
+					fw.close();
+					JOptionPane.showMessageDialog(okButton, "새 도서 정보가 저장되었습니다");
+
+					Date date = new Date();
+					SimpleDateFormat formatter = new SimpleDateFormat("yyMMddhhmmss");
+					String strDate = formatter.format(date);
+
+					idTextField.setText("ISBN" + strDate);
+					nameTextField.setText("");
+					priceTextField.setText("");
+					authorTextField.setText("");
+					descTextField.setText("");
+					categoryTextField.setText("");
+					dateTextField.setText("");
+
+					System.out.println("새 도서 정보가 저장되었습니다.");
+				} catch (Exception ex) {
+					System.out.println(ex);
+				}
+			}
+		});
 
 		JLabel noLabel = new JLabel("취소");
 		noLabel.setFont(ft);
 		JButton noButton = new JButton();
 		noButton.add(noLabel);
 		buttonPanel.add(noButton);
-	}
-
-	public static void main(String[] args) {
-
-		JFrame frame = new JFrame();
-		frame.setBounds(0, 0, 1000, 750);
-		frame.setLayout(null);
-
-		JPanel mPagePanel = new JPanel();
-		mPagePanel.setBounds(0, 150, 1000, 750);
-
-		frame.add(mPagePanel);
-		mPagePanel.add("주문하기", new AdminPage(mPagePanel));
-		frame.setVisible(true);
+		noButton.addActionListener(new AbstractAction() {
+			public void actionPerformed(ActionEvent e) {
+				nameTextField.setText("");
+				priceTextField.setText("");
+				authorTextField.setText("");
+				descTextField.setText("");
+				categoryTextField.setText("");
+				dateTextField.setText("");
+			}
+		});
 	}
 }

@@ -21,6 +21,7 @@ public class Welcome {
 	static User mUser;
 
 	public static void main(String[] args) {
+		new GuestWindow("고객 정보 입력", 0, 0, 1000, 750);
 		ArrayList<Book> mBookList;
 		int mTotalBook = 0;
 		//String[][] mBook = new String[NUM_BOOK][NUM_ITEM];

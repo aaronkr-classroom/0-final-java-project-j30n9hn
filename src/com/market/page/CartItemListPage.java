@@ -5,6 +5,11 @@ import com.market.cart.Cart;
 import com.market.cart.CartItem;
 import java.awt.*;
 import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class CartItemListPage extends JPanel {
 
@@ -66,32 +71,107 @@ public class CartItemListPage extends JPanel {
 		JButton clearButton = new JButton();
 		clearButton.add(buttonLabel);
 		buttonPanel.add(clearButton);
+		clearButton.addActionListener(new AbstractAction() {
+			public void actionPerformed(ActionEvent e) {
+				ArrayList<CartItem> cartItem = cart.getmCartItem();
+				if (cart.mCartCount == 0)
+					JOptionPane.showMessageDialog(clearButton, "장바구니에 항목이 없습니다");
+				else {
+					int select = JOptionPane.showConfirmDialog(clearButton, "장바구니의 모든 항목을 삭제하겠습니까? ");
+					if (select == 0) {
+						TableModel tableModel = new DefaultTableModel(new Object[0][0], tableHeader);
+						cartTable.setModel(tableModel);
+						totalPricelabel.setText("총금액: " + 0 + " 원");
+						JOptionPane.showMessageDialog(clearButton, "장바구니의 모든 항목을 삭제했습니다");
+
+						cart.deleteBook();
+					}
+				}
+			}
+		});
 
 		JLabel removeLabel = new JLabel("장바구니의 항목 삭제하기");
 		removeLabel.setFont(ft);
 		JButton removeButton = new JButton();
 		removeButton.add(removeLabel);
 		buttonPanel.add(removeButton);
+		removeButton.addActionListener(new AbstractAction() {
+			public void actionPerformed(ActionEvent e) {
+				if (cart.mCartCount == 0)
+					JOptionPane.showMessageDialog(clearButton, "장바구니에 항목이 없습니다");
+				else if (mSelectRow == -1)
+					JOptionPane.showMessageDialog(clearButton, "장바구니에서 삭제할 항목을 선택하세요");
+				else {
+					ArrayList<CartItem> cartItem = cart.getmCartItem();
+					cartItem.remove(mSelectRow);
+					cart.mCartCount -= 1;
+					Object[][] content = new Object[cartItem.size()][tableHeader.length];
+					Integer totalPrice = 0;
+					for (int i = 0; i < cartItem.size(); i++) {
+						CartItem item = cartItem.get(i);
+						content[i][0] = item.getBookID();
+						content[i][1] = item.getItemBook().getName();
+						content[i][2] = item.getItemBook().getUnitPrice();
+						content[i][3] = item.getQuantity();
+						content[i][4] = item.getTotalPrice();
+						totalPrice += item.getQuantity() * item.getItemBook().getUnitPrice();
+					}
+					TableModel tableModel = new DefaultTableModel(content, tableHeader);
+					totalPricelabel.setText("총금액: " + totalPrice + " 원");
+					cartTable.setModel(tableModel);
+					mSelectRow = -1;
+				}
+			}
+		});
+		cartTable.addMouseListener(new MouseListener() {
+
+			public void mouseClicked(MouseEvent e) {
+				int row = cartTable.getSelectedRow();
+				mSelectRow = row;
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+			}
+
+		});
 
 		JLabel refreshLabel = new JLabel("장바구니 새로 고침");
 		refreshLabel.setFont(ft);
 		JButton refreshButton = new JButton();
 		refreshButton.add(refreshLabel);
 		buttonPanel.add(refreshButton);
+		refreshButton.addActionListener(new AbstractAction() {
+			public void actionPerformed(ActionEvent e) {
+				ArrayList<CartItem> cartItem = cart.getmCartItem();
+				Object[][] content = new Object[cartItem.size()][tableHeader.length];
+				Integer totalPrice = 0;
+				for (int i = 0; i < cartItem.size(); i++) {
+					CartItem item = cartItem.get(i);
+					content[i][0] = item.getBookID();
+					content[i][1] = item.getItemBook().getName();
+					content[i][2] = item.getItemBook().getUnitPrice();
+					content[i][3] = item.getQuantity();
+					content[i][4] = item.getTotalPrice();
+					totalPrice += item.getQuantity() * item.getItemBook().getUnitPrice();
+				}
+				TableModel tableModel = new DefaultTableModel(content, tableHeader);
+				totalPricelabel.setText("총금액: " + totalPrice + " 원");
+				cartTable.setModel(tableModel);
+			}
+		});
 	}
 
-	public static void main(String[] args) {
-
-		Cart mCart = new Cart();
-		JFrame frame = new JFrame();
-		frame.setBounds(0, 0, 1000, 750);
-		frame.setLayout(null);
-
-		JPanel mPagePanel = new JPanel();
-		mPagePanel.setBounds(0, 150, 1000, 750);
-
-		frame.add(mPagePanel);
-		mPagePanel.add("장바구니의 상품 목록 보기", new CartItemListPage(mPagePanel, mCart));
-		frame.setVisible(true);
-	}
 }
