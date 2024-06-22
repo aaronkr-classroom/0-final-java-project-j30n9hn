@@ -57,6 +57,7 @@ public class MainWindow extends JFrame {
 	}
 
 	private void menuIntroduction() {
+		mCart = new Cart();
 		Font ft;
 		ft = new Font("함초롬돋움", Font.BOLD, 15);
 
